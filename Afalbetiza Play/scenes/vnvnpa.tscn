@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://divd5bnygltql" path="res://scripts/vnvnpa.gd" id="1_48xtn"]
 [ext_resource type="Texture2D" uid="uid://4j2rt15htln1" path="res://assets/disgner/IMG_20260723_094201_609.png" id="1_ofi6k"]
-[ext_resource type="Texture2D" uid="uid://bu215djrnnct" path="res://assets/icon.svg" id="2_2xxpt"]
+[ext_resource type="Texture2D" uid="uid://cfeag7jvhd2tv" path="res://assets/WhatsApp Image 2026-07-24 at 17.20.05.jpeg" id="2_2xxpt"]
+[ext_resource type="Texture2D" uid="uid://dgss2v8r1nt40" path="res://assets/WhatsApp Image 2026-07-24 at 17.19.39.jpeg" id="2_slx42"]
 
 [node name="Control" type="Control" unique_id=716865744]
 layout_mode = 3
@@ -13,10 +14,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_48xtn")
 
+[node name="WhatsAppImage20260724At17_19_39" type="Sprite2D" parent="." unique_id=1325774173]
+modulate = Color(0.20518398, 0.14842516, 0.07747665, 1)
+position = Vector2(671.7588, 388)
+rotation = 1.5707964
+scale = Vector2(1.3148409, 1.1316268)
+texture = ExtResource("2_slx42")
+
 [node name="Img20260723094201609" type="Sprite2D" parent="." unique_id=1736304633]
+modulate = Color(0.4656887, 0.4656887, 0.4656887, 1)
 texture_filter = 1
-position = Vector2(583, 403)
-scale = Vector2(10.292209, 7.303976)
+position = Vector2(583, 395)
 texture = ExtResource("2_2xxpt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=190925763]

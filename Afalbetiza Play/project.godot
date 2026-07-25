@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Afalbetiza Play"
+config/name="Alfabetiza Play"
 run/main_scene="uid://pqa22025m6ig"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://dgss2v8r1nt40"
@@ -19,6 +19,7 @@ config/icon="uid://dgss2v8r1nt40"
 
 AudioManager="*uid://c5p5es6i0416p"
 Pause="*uid://b7ah0inkvennk"
+Node2d="*uid://bvbmoh7tetbs3"
 
 [display]
 

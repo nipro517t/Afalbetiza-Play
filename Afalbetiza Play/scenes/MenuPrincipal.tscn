@@ -86,7 +86,7 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(1.6411257, 1.6411257, 0.1721273, 1)
 theme_override_colors/font_shadow_color = Color(0, 0.17254743, 0.30791175, 1)
 theme_override_font_sizes/font_size = 60
-text = "Afalbetiza Play"
+text = "Alfabetiza Play"
 horizontal_alignment = 1
 
 [node name="NewPiskel(1)" type="Sprite2D" parent="." unique_id=1908476970]
@@ -103,6 +103,13 @@ position = Vector2(1065.0001, 376)
 rotation = -3.1415927
 scale = Vector2(9.700524, 6.173889)
 texture = ExtResource("3_q4epk")
+
+[node name="Label" type="Label" parent="." unique_id=130258713]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.078431375, 0.11764706, 0.29411766, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.15686275, 0.7254902)
 
 [connection signal="pressed" from="BotaoEsquerda" to="." method="_on_botao_esquerda_pressed"]
 [connection signal="pressed" from="BotaoDireita" to="." method="_on_botao_direita_pressed"]

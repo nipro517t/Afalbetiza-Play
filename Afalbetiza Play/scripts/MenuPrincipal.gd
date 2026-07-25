@@ -14,6 +14,11 @@ func _ready():
 	get_tree().paused = false
 	indice_atual = 0        # garante que começa no primeiro jogo
 	atualizar_card()
+	##func _ready():
+	print("Viewport size: ", get_viewport_rect().size)
+	print("Window size: ", DisplayServer.window_get_size())
+	print("Screen size: ", DisplayServer.screen_get_size())
+	$Label.text = str(get_viewport_rect().size) + " | " + str(DisplayServer.window_get_size())
 
 func atualizar_card():
 	var jogo = lista_jogos[indice_atual]
