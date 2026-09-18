@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://1mhlgf5ja67g"]
+
+[ext_resource type="Script" uid="uid://bypgdnphbyc8v" path="res://scripts/jogos/construtor_palavras.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dkixirmdu6rp5" path="res://assets/imagens/gato.png" id="2_hndc2"]
+[ext_resource type="Texture2D" uid="uid://yk3nd487i0jt" path="res://assets/imagens/bola.png" id="3_v3l8t"]
+[ext_resource type="Texture2D" uid="uid://6xjo1w34h6i8" path="res://assets/imagens/foca.png" id="4_sw6y4"]
+[ext_resource type="Texture2D" uid="uid://qld4q5miytv1" path="res://assets/imagens/amor.png" id="5_anyrx"]
+[ext_resource type="Texture2D" uid="uid://bjqc4jwbym4mn" path="res://assets/imagens/pato.png" id="6_4m4xm"]
+[ext_resource type="Texture2D" uid="uid://dqbxl4jc5elh5" path="res://assets/imagens/sapo.png" id="7_53165"]
+[ext_resource type="Texture2D" uid="uid://8f61005d200m" path="res://assets/imagens/dedo.png" id="8_ccujw"]
+[ext_resource type="Texture2D" uid="uid://c6khk6cbjd25c" path="res://assets/imagens/mesa.png" id="9_o7thq"]
+[ext_resource type="Texture2D" uid="uid://c4k3vlrinlwok" path="res://assets/imagens/fada.png" id="10_jsdkb"]
+[ext_resource type="Texture2D" uid="uid://ci05fh8j4gma4" path="res://assets/imagens/lua.png" id="11_8n0cb"]
+[ext_resource type="Texture2D" uid="uid://cwy1rixu56one" path="res://assets/imagens/casa.png" id="12_2kp5a"]
+[ext_resource type="Texture2D" uid="uid://bjova8g3uqdqt" path="res://assets/imagens/pipa.png" id="13_t0lab"]
+[ext_resource type="Texture2D" uid="uid://pipwwl08s8sc" path="res://assets/imagens/rato.png" id="14_24wgx"]
+[ext_resource type="Texture2D" uid="uid://ch777rg6vnev8" path="res://assets/imagens/mala.png" id="15_ppwmu"]
+[ext_resource type="Texture2D" uid="uid://dt6wnp3dxy8i6" path="res://assets/imagens/vaca.png" id="16_j3h0t"]
+
+[node name="ConstrutorPalavras" type="Control" unique_id=787133272]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+imagens_das_palavras = Array[Texture2D]([ExtResource("2_hndc2"), ExtResource("3_v3l8t"), ExtResource("4_sw6y4"), ExtResource("5_anyrx"), ExtResource("6_4m4xm"), ExtResource("7_53165"), ExtResource("15_ppwmu"), ExtResource("16_j3h0t"), ExtResource("8_ccujw"), ExtResource("9_o7thq"), ExtResource("10_jsdkb"), ExtResource("11_8n0cb"), ExtResource("12_2kp5a"), ExtResource("13_t0lab"), ExtResource("14_24wgx")])
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=711089134]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.069699444, 0.27676567, 5.968213e-06, 1)
+
+[node name="LabelObjeto" type="Label" parent="." unique_id=140206237]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "CASA"
+horizontal_alignment = 1
+
+[node name="ImagemObjeto" type="TextureRect" parent="." unique_id=630201188]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.0
+offset_top = 130.0
+offset_right = 119.0
+offset_bottom = 375.0
+grow_horizontal = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slots" type="HBoxContainer" parent="." unique_id=1609803997]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -44.0
+offset_right = 110.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Slot1" type="Label" parent="Slots" unique_id=505214505]
+custom_minimum_size = Vector2(90, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slot2" type="Label" parent="Slots" unique_id=2058363514]
+custom_minimum_size = Vector2(90, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opcoes" type="HBoxContainer" parent="." unique_id=20449962]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -140.0
+offset_right = 150.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="BotaoVoltar" type="Button" parent="." unique_id=360757522]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 136.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "VOLTAR"
+
+[connection signal="pressed" from="BotaoVoltar" to="." method="_on_botao_voltar_pressed"]

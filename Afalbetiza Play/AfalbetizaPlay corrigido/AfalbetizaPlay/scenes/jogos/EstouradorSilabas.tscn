@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bqkhnwxb5okeb"]
+
+[ext_resource type="Script" uid="uid://b67pou3odsjnu" path="res://scripts/jogos/estourador_silabas.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dkixirmdu6rp5" path="res://assets/imagens/gato.png" id="2_d5ii5"]
+[ext_resource type="Texture2D" uid="uid://yk3nd487i0jt" path="res://assets/imagens/bola.png" id="3_q8yfi"]
+[ext_resource type="Texture2D" uid="uid://6xjo1w34h6i8" path="res://assets/imagens/foca.png" id="4_sgc3d"]
+[ext_resource type="Texture2D" uid="uid://qld4q5miytv1" path="res://assets/imagens/amor.png" id="5_6e3p3"]
+[ext_resource type="Texture2D" uid="uid://bjqc4jwbym4mn" path="res://assets/imagens/pato.png" id="6_42alv"]
+[ext_resource type="Texture2D" uid="uid://dqbxl4jc5elh5" path="res://assets/imagens/sapo.png" id="7_kmi5e"]
+[ext_resource type="Texture2D" uid="uid://8f61005d200m" path="res://assets/imagens/dedo.png" id="8_1snls"]
+[ext_resource type="Texture2D" uid="uid://c6khk6cbjd25c" path="res://assets/imagens/mesa.png" id="9_d6vy4"]
+[ext_resource type="Texture2D" uid="uid://c4k3vlrinlwok" path="res://assets/imagens/fada.png" id="10_tjidu"]
+[ext_resource type="Texture2D" uid="uid://ci05fh8j4gma4" path="res://assets/imagens/lua.png" id="11_xvvet"]
+[ext_resource type="Texture2D" uid="uid://cwy1rixu56one" path="res://assets/imagens/casa.png" id="12_5iu0p"]
+[ext_resource type="Texture2D" uid="uid://bjova8g3uqdqt" path="res://assets/imagens/pipa.png" id="13_o76gw"]
+[ext_resource type="Texture2D" uid="uid://pipwwl08s8sc" path="res://assets/imagens/rato.png" id="14_u0uyq"]
+[ext_resource type="Texture2D" uid="uid://ch777rg6vnev8" path="res://assets/imagens/mala.png" id="15_okr0m"]
+[ext_resource type="Texture2D" uid="uid://dt6wnp3dxy8i6" path="res://assets/imagens/vaca.png" id="16_c8s2f"]
+
+[node name="EstouradorSilabas" type="Control" unique_id=459832727]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+imagens_das_palavras = Array[Texture2D]([ExtResource("2_d5ii5"), ExtResource("3_q8yfi"), ExtResource("4_sgc3d"), ExtResource("5_6e3p3"), ExtResource("6_42alv"), ExtResource("7_kmi5e"), ExtResource("15_okr0m"), ExtResource("16_c8s2f"), ExtResource("8_1snls"), ExtResource("9_d6vy4"), ExtResource("10_tjidu"), ExtResource("11_xvvet"), ExtResource("12_5iu0p"), ExtResource("13_o76gw"), ExtResource("14_u0uyq")])
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=885310612]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.95, 0.85, 1)
+
+[node name="LabelMeta" type="Label" parent="." unique_id=1403905512]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 16.0
+offset_right = 150.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95686275)
+theme_override_font_sizes/font_size = 40
+text = "__ TO"
+horizontal_alignment = 1
+
+[node name="ImagemPalavra" type="TextureRect" parent="." unique_id=1932004815]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 76.0
+offset_right = 116.0
+offset_bottom = 276.0
+grow_horizontal = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelPontos" type="Label" parent="." unique_id=1861128210]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 52.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5176471)
+theme_override_font_sizes/font_size = 24
+text = "PONTOS: 0"
+
+[node name="Vidas" type="HBoxContainer" parent="." unique_id=1701246599]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="Vida1" type="ColorRect" parent="Vidas" unique_id=1137498552]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="Vida2" type="ColorRect" parent="Vidas" unique_id=476497932]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="Vida3" type="ColorRect" parent="Vidas" unique_id=803690496]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+color = Color(1, 0.85, 0.2, 1)
+
+[node name="AreaBaloes" type="Node2D" parent="." unique_id=771692241]
+
+[node name="TimerSpawn" type="Timer" parent="." unique_id=1066442687]
+wait_time = 2.73
+
+[node name="BotaoVoltar" type="Button" parent="." unique_id=768481927]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 136.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "VOLTAR"
+
+[connection signal="pressed" from="BotaoVoltar" to="." method="_on_botao_voltar_pressed"]
