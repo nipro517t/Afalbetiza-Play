@@ -34,7 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.069699444, 0.27676567, 5.968213e-06, 1)
+color = Color(0.12754911, 0.42966104, 9.62615e-08, 1)
 
 [node name="LabelObjeto" type="Label" parent="." unique_id=140206237]
 layout_mode = 1
@@ -46,6 +46,7 @@ offset_top = 60.0
 offset_right = 200.0
 offset_bottom = 120.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "CASA"
 horizontal_alignment = 1
@@ -81,6 +82,7 @@ alignment = 1
 [node name="Slot1" type="Label" parent="Slots" unique_id=505214505]
 custom_minimum_size = Vector2(90, 80)
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "_"
 horizontal_alignment = 1
@@ -89,6 +91,7 @@ vertical_alignment = 1
 [node name="Slot2" type="Label" parent="Slots" unique_id=2058363514]
 custom_minimum_size = Vector2(90, 80)
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "_"
 horizontal_alignment = 1
