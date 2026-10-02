@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://bw3wkgrwes88f"]
+
+[ext_resource type="Script" uid="uid://dyjdoem0tcwmp" path="res://scripts/ui/tela_nome_jogador.gd" id="1"]
+
+[node name="TelaNomeJogador" type="Control" unique_id=1852454901]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=921789887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.60784316, 0.5882353, 1)
+
+[node name="Painel" type="PanelContainer" parent="." unique_id=1131733847]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -330.0
+offset_right = 460.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Abas" type="TabContainer" parent="Painel" unique_id=-1194967295]
+custom_minimum_size = Vector2(900, 640)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+current_tab = 0
+
+[node name="PerfilExistente" type="VBoxContainer" parent="Painel/Abas" unique_id=-1194967294]
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 0
+
+[node name="TituloExistente" type="Label" parent="Painel/Abas/PerfilExistente" unique_id=-1194967293]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Quem é você?"
+horizontal_alignment = 1
+
+[node name="Rolagem" type="ScrollContainer" parent="Painel/Abas/PerfilExistente" unique_id=-1194967292]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListaPerfis" type="VBoxContainer" parent="Painel/Abas/PerfilExistente/Rolagem" unique_id=-1194967291]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="LabelSemPerfis" type="Label" parent="Painel/Abas/PerfilExistente" unique_id=-1194967290]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Nenhum perfil criado ainda — toque em \"Novo Jogador\" pra começar."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NovoJogador" type="VBoxContainer" parent="Painel/Abas" unique_id=-1194967289]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 22
+metadata/_tab_index = 1
+
+[node name="Titulo" type="Label" parent="Painel/Abas/NovoJogador" unique_id=1731522564]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "Quem vai jogar hoje?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelNome" type="Label" parent="Painel/Abas/NovoJogador" unique_id=13620193]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Nome"
+
+[node name="CampoNome" type="LineEdit" parent="Painel/Abas/NovoJogador" unique_id=1540248678]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Digite seu nome"
+max_length = 40
+
+[node name="LabelTurma" type="Label" parent="Painel/Abas/NovoJogador" unique_id=1088061172]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Turma / Série"
+
+[node name="OpcaoTurma" type="OptionButton" parent="Painel/Abas/NovoJogador" unique_id=-1194967288]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[node name="LabelErro" type="Label" parent="Painel/Abas/NovoJogador" unique_id=858771053]
+visible = false
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.15, 0.15, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Digite seu nome e escolha a turma pra continuar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BotaoComecar" type="Button" parent="Painel/Abas/NovoJogador" unique_id=1796510727]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "COMEÇAR"
+
+[connection signal="text_submitted" from="Painel/Abas/NovoJogador/CampoNome" to="." method="_on_campo_text_submitted"]
+[connection signal="pressed" from="Painel/Abas/NovoJogador/BotaoComecar" to="." method="_on_botao_comecar_pressed"]

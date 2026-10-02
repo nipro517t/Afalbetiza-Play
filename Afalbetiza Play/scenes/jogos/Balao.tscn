@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bcw8vdeslb8vx"]
+
+[ext_resource type="Script" uid="uid://2chysw1ag7up" path="res://scripts/jogos/balao.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://rvbw5jp55tn5" path="res://assets/balao.png" id="2_eg0pt"]
+[ext_resource type="FontFile" uid="uid://csg68wtfq3o4a" path="res://assets/fonts/BoldPixels.ttf" id="3_lfmry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qliic"]
+atlas = ExtResource("2_eg0pt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quw0v"]
+atlas = ExtResource("2_eg0pt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v72sn"]
+atlas = ExtResource("2_eg0pt")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0svqp"]
+atlas = ExtResource("2_eg0pt")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiv75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qliic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quw0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v72sn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0svqp")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebum8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6c5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qliic"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_quw0v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v72sn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0svqp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fj2x2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oknrg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0swsq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lfmry"]
+
+[node name="Balao" type="Control" unique_id=1544894440]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = 1.0000005
+offset_bottom = 1.0000005
+scale = Vector2(3.328125, 3.375)
+script = ExtResource("1")
+
+[node name="balao" type="AnimatedSprite2D" parent="." unique_id=1410944689]
+position = Vector2(9.276995, 8.888889)
+scale = Vector2(2, 1.952)
+sprite_frames = SubResource("SpriteFrames_uiv75")
+
+[node name="Button" type="Button" parent="." unique_id=1949749948]
+layout_mode = 0
+offset_left = -13.220658
+offset_top = -19.259262
+offset_right = 17.30434
+offset_bottom = 11.578167
+scale = Vector2(1.08, 1.049)
+theme_override_colors/font_color = Color(1, 1, 0.7607843, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_lfmry")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ebum8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n6c5v")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_qliic")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_quw0v")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_v72sn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0svqp")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_fj2x2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oknrg")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_0swsq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lfmry")
+text = "gg"

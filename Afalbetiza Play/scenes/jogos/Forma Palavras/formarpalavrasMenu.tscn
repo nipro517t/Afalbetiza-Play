@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cd1be3i0eol6y"]
-
-[ext_resource type="Script" uid="uid://bleftjgbav7o4" path="res://scripts/Forma Palavras/forma_palavras.gd" id="1_ek0to"]
-
-[node name="Node2D" type="Node2D" unique_id=1416683628]
-script = ExtResource("1_ek0to")

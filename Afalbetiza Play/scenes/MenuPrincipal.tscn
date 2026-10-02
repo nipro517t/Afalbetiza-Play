@@ -1,10 +1,54 @@
-[gd_scene format=3 uid="uid://pqa22025m6ig"]
+[gd_scene format=3 uid="uid://dwg513aceo7a5"]
 
-[ext_resource type="Script" uid="uid://b5cyaswek6eq" path="res://scripts/MenuPrincipal.gd" id="1_ffwdg"]
-[ext_resource type="Texture2D" uid="uid://liaa14pe8cml" path="res://assets/Background.jpeg" id="2_ysajj"]
-[ext_resource type="Texture2D" uid="uid://b33xtncxw64bs" path="res://assets/New Piskel (1).png" id="3_q4epk"]
+[ext_resource type="Script" uid="uid://cyhrj4n6uyi0x" path="res://scripts/MenuPrincipal.gd" id="1_ffwdg"]
+[ext_resource type="Texture2D" uid="uid://r0l6vpd67vnk" path="res://assets/backgrounds/fundo_menu.svg" id="2_ysajj"]
+[ext_resource type="FontFile" uid="uid://csg68wtfq3o4a" path="res://assets/fonts/BoldPixels.ttf" id="3_cjknc"]
+[ext_resource type="Texture2D" uid="uid://y0r381gk3ls5" path="res://assets/setas.png" id="3_q4epk"]
 
-[node name="MenuPricipal" type="Control" unique_id=155960773]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjknc"]
+atlas = ExtResource("3_q4epk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5jwn"]
+atlas = ExtResource("3_q4epk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o3yp"]
+atlas = ExtResource("3_q4epk")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ytrl"]
+atlas = ExtResource("3_q4epk")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4togl"]
+atlas = ExtResource("3_q4epk")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjknc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5jwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o3yp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ytrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4togl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MenuPrincipal" type="Control" unique_id=1644491836]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,12 +57,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ffwdg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2110059044]
-position = Vector2(600.00006, 400)
-scale = Vector2(0.8333333, 1.111111)
+[node name="Fundo" type="Sprite2D" parent="." unique_id=552088123]
+position = Vector2(600, 400)
 texture = ExtResource("2_ysajj")
 
-[node name="BotaoEsquerda" type="Button" parent="." unique_id=1198073144]
+[node name="TituloGeral" type="Label" parent="." unique_id=1912461355]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.0
+offset_top = 11.0
+offset_right = 156.0
+offset_bottom = 66.00012
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1.6411257, 1.6411257, 0.1721273, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.17254743, 0.30791175, 1)
+theme_override_fonts/font = ExtResource("3_cjknc")
+theme_override_font_sizes/font_size = 60
+text = "Afalbetiza Play"
+horizontal_alignment = 1
+
+[node name="Carrossel" type="Control" parent="." unique_id=299074562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BotaoEsquerda" type="Button" parent="Carrossel" unique_id=1753380532]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -29,7 +97,7 @@ offset_right = 324.0
 offset_bottom = 51.0
 grow_vertical = 2
 
-[node name="BotaoDireita" type="Button" parent="." unique_id=1209916536]
+[node name="BotaoDireita" type="Button" parent="Carrossel" unique_id=1574067329]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -44,7 +112,7 @@ offset_bottom = 40.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="CardCentral" type="TextureButton" parent="." unique_id=1631300906]
+[node name="CardCentral" type="TextureButton" parent="Carrossel" unique_id=429085726]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,7 +128,7 @@ grow_vertical = 2
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="TituloJogo" type="Label" parent="." unique_id=1775452588]
+[node name="TituloJogo" type="Label" parent="Carrossel" unique_id=232084196]
 layout_mode = 0
 offset_left = 292.0
 offset_top = 153.0
@@ -68,49 +136,77 @@ offset_right = 571.0
 offset_bottom = 198.0
 theme_override_colors/font_color = Color(0.1764706, 1, 1, 0.8509804)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8862745)
+theme_override_fonts/font = ExtResource("3_cjknc")
 theme_override_font_sizes/font_size = 29
-text = "JOGO DAS VOGAIS"
+text = "Em breve"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TituloGeral" type="Label" parent="." unique_id=1601156382]
+[node name="LabelJogador" type="Label" parent="." unique_id=101]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -156.0
-offset_top = 11.0
-offset_right = 156.0
-offset_bottom = 66.00012
-grow_horizontal = 2
-theme_override_colors/font_color = Color(1.6411257, 1.6411257, 0.1721273, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.17254743, 0.30791175, 1)
-theme_override_font_sizes/font_size = 60
-text = "Alfabetiza Play"
-horizontal_alignment = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -30.0
+offset_right = 400.0
+offset_bottom = -6.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "sem nome de jogador"
 
-[node name="NewPiskel(1)" type="Sprite2D" parent="." unique_id=1908476970]
+[node name="BotaoRanking" type="Button" parent="." unique_id=102]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -56.0
+offset_right = -140.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "RANKING"
+
+[node name="BotaoTrocarJogador" type="Button" parent="." unique_id=103]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -56.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "TROCAR"
+
+[node name="Decoracoes" type="Node2D" parent="." unique_id=424196082]
+
+[node name="EnfeiteEsquerdo" type="AnimatedSprite2D" parent="Decoracoes" unique_id=1083697274]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(149, 398.99997)
+position = Vector2(149.00002, 399.99997)
 scale = Vector2(9.953124, 5.875)
-texture = ExtResource("3_q4epk")
+sprite_frames = SubResource("SpriteFrames_xrivr")
+autoplay = "default"
 
-[node name="NewPiskel(1)2" type="Sprite2D" parent="." unique_id=632616622]
+[node name="EnfeiteDireito" type="AnimatedSprite2D" parent="Decoracoes" unique_id=540384120]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(1065.0001, 376)
+position = Vector2(1055, 400)
 rotation = -3.1415927
-scale = Vector2(9.700524, 6.173889)
-texture = ExtResource("3_q4epk")
+scale = Vector2(9.953124, 5.875)
+sprite_frames = SubResource("SpriteFrames_xrivr")
+autoplay = "default"
 
-[node name="Label" type="Label" parent="." unique_id=130258713]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.078431375, 0.11764706, 0.29411766, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0.15686275, 0.7254902)
-
-[connection signal="pressed" from="BotaoEsquerda" to="." method="_on_botao_esquerda_pressed"]
-[connection signal="pressed" from="BotaoDireita" to="." method="_on_botao_direita_pressed"]
-[connection signal="pressed" from="CardCentral" to="." method="_on_card_central_pressed"]
+[connection signal="pressed" from="Carrossel/BotaoEsquerda" to="." method="_on_botao_esquerda_pressed"]
+[connection signal="pressed" from="Carrossel/BotaoDireita" to="." method="_on_botao_direita_pressed"]
+[connection signal="pressed" from="Carrossel/CardCentral" to="." method="_on_card_central_pressed"]
+[connection signal="pressed" from="BotaoRanking" to="." method="_on_botao_ranking_pressed"]
+[connection signal="pressed" from="BotaoTrocarJogador" to="." method="_on_botao_trocar_jogador_pressed"]
