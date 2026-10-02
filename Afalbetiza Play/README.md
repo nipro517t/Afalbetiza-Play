@@ -14,7 +14,14 @@ mexer na lógica.
 ## Estrutura de pastas
 
 ```
-assets/     -> arte, fonte, tema (só o do menu por enquanto)
+assets/
+  backgrounds/
+	fundo_menu.svg          -> fundo do menu principal (céu, sol, nuvens, letrinhas flutuando)
+	fundo_estourador.svg    -> fundo do Estourador de Sílabas (céu + bolhas decorativas)
+	fundo_construtor.svg    -> fundo do Construtor de Palavras (chão + blocos de letra nos cantos)
+	fundo_pista.svg         -> fundo da Pista das Letras (céu + colinas + árvores nas bordas)
+  imagens/    -> 1 imagem por palavra dos bancos de Estourador/Construtor (ver seção "Imagens")
+  fonts/, icon.svg, setas.png, balao.png
 scenes/
   MenuPrincipal.tscn
   ui/
@@ -188,6 +195,35 @@ pra lá.
   `ImagemPalavra` no Estourador) com posição/tamanho de exemplo — fique
   à vontade pra mover, redimensionar ou trocar o `stretch_mode` dele
   direto no editor conforme a arte final.
+
+## Fundos dos minijogos
+
+Os 3 minijogos tinham um `ColorRect` de cor lisa no lugar de fundo
+(placeholder). Agora cada um tem um fundo de verdade — SVG desenhado no
+mesmo estilo do `fundo_menu.svg` (céu em gradiente, sol, nuvens),
+trocando só o tema/cor de acordo com o jogo:
+
+- **Estourador de Sílabas** (`fundo_estourador.svg`) — céu azul claro
+  com bolhas decorativas nos cantos, combinando com as bolhas de
+  verdade que sobem durante o jogo.
+- **Construtor de Palavras** (`fundo_construtor.svg`) — chão terroso
+  (tom de madeira/oficina) com blocos de letra decorativos nos dois
+  cantos inferiores, reforçando a ideia de "montar" algo.
+- **Pista das Letras** (`fundo_pista.svg`) — céu + colinas verdes
+  (igual ao menu) com uma arvorezinha decorativa em cada canto inferior.
+
+Em todos os três, o nó continua se chamando `Fundo` (só trocou de
+`ColorRect` pra `TextureRect`) — nenhum script referenciava esse nó
+diretamente, então a troca não exige nenhuma outra mudança. As
+decorações de cada SVG ficam deliberadamente nas bordas/cantos, longe
+do centro da tela, onde moram o texto e os botões de cada jogo — então
+dá pra trocar o fundo por uma arte final depois sem se preocupar em
+"tampar" nada importante.
+
+Pra trocar por uma arte final mais pra frente: é só substituir o
+arquivo em `assets/backgrounds/` (mesmo nome) ou apontar o `texture`
+do nó `Fundo`, no Inspector, pra uma imagem nova — não precisa mexer
+em nenhum script.
 
 ## Como abrir
 
@@ -375,11 +411,27 @@ turmas" (padrão) + uma opção por turma que já tem alguém no ranking
 no filtro). Com um filtro escolhido, a posição (1º, 2º...) passa a ser
 relativa só àquela turma, não ao ranking geral.
 
+## Changelog (fundos dos minijogos)
+
+- Os 3 minijogos ganharam fundo de verdade (SVG, mesmo estilo visual
+  do menu) no lugar do `ColorRect` de cor lisa. Ver seção "Fundos dos
+  minijogos" acima.
+- Corrigido um item desatualizado nesta lista de pendências: ela ainda
+  dizia "nada é salvo entre sessões", mas a seção "Perfil da criança,
+  pontos e ranking" (acima) já documentava `PerfilJogador` salvando
+  pontos em disco — a sessão que implementou isso não tinha voltado
+  aqui pra atualizar esse item.
+
 ## O que falta (de propósito, pra vocês decidirem o rumo)
 
-- Arte final de cada jogo (carrinho, bolhas, cenário, ícones dos cards).
+- Arte final de cada jogo (carrinho, bolhas, ícones dos cards no
+  `Catalogo`) — os fundos (céu/cenário) já têm uma versão de verdade
+  (ver "Fundos dos minijogos"), mas os elementos *dentro* de cada jogo
+  (carrinho, bolha, botões) ainda são formas simples.
 - Áudios de verdade no `AudioManager` (locução e efeitos sonoros).
 - Ajustar o traçado da `Curve2D` da Pista das Letras pra imitar o
-  formato real de cada letra.
-- Persistência de progresso (quantas estrelas em cada jogo) — hoje
-  nada é salvo entre sessões.
+  formato real de cada letra (ela também ainda não tem as 26 letras,
+  só a curva genérica em formato de "tenda").
+- Persistência de **estrelas por minijogo** (hoje `PerfilJogador` salva
+  pontos por cena jogada, mas não a quantidade de estrelas/resultado de
+  cada partida).

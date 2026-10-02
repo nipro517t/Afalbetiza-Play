@@ -1,0 +1,27 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="skyPista" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#8ec9f0"/>
+<stop offset="60%" stop-color="#bfe3f7"/>
+<stop offset="100%" stop-color="#fff3d0"/>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="800" fill="url(#skyPista)"/>
+<circle cx="100" cy="110" r="62" fill="#fff1b8" opacity="0.9"/>
+<circle cx="100" cy="110" r="42" fill="#ffd95e"/>
+<g fill="#ffffff" opacity="0.9">
+<ellipse cx="1000" cy="150" rx="66" ry="30"/>
+<ellipse cx="1058" cy="134" rx="48" ry="24"/>
+<ellipse cx="950" cy="138" rx="38" ry="20"/>
+</g>
+<path d="M0 640 Q300 570 600 640 T1200 640 V800 H0 Z" fill="#8bc76b"/>
+<path d="M0 700 Q300 640 600 700 T1200 700 V800 H0 Z" fill="#6fb355"/>
+<g>
+<rect x="55" y="690" width="14" height="40" fill="#8a5a2b"/>
+<circle cx="62" cy="680" r="34" fill="#4fae5e"/>
+</g>
+<g>
+<rect x="1120" y="700" width="14" height="40" fill="#8a5a2b"/>
+<circle cx="1127" cy="690" r="34" fill="#4fae5e"/>
+</g>
+</svg>

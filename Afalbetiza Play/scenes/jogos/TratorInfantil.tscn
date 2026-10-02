@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bfr0nnuc8jri"]
+
+[ext_resource type="Script" path="res://scripts/jogos/jogo_web.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/fundo_pista.svg" id="0_fundo"]
+
+[node name="TratorInfantil" type="Control" unique_id=5100000001]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+url = "https://al3xmoreira.github.io/infantil/"
+titulo = "Trator das Letras"
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=5100000002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("0_fundo")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="LabelTitulo" type="Label" parent="." unique_id=5100000003]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Trator das Letras"
+horizontal_alignment = 1
+
+[node name="LabelExplicacao" type="Label" parent="." unique_id=5100000004]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 150.0
+offset_right = 340.0
+offset_bottom = 260.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_font_sizes/font_size = 22
+text = "Guie o trator e colete as letras da palavra na ordem certa!
+
+Esse jogo abre no navegador do aparelho — toque no botão abaixo."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BotaoAbrir" type="Button" parent="." unique_id=5100000005]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "ABRIR JOGO"
+
+[node name="BotaoVoltar" type="Button" parent="." unique_id=5100000006]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 136.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "VOLTAR"
+
+[connection signal="pressed" from="BotaoAbrir" to="." method="_on_botao_abrir_pressed"]
+[connection signal="pressed" from="BotaoVoltar" to="." method="_on_botao_voltar_pressed"]

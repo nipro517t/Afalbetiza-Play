@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bqkhnwxb5okeb"]
 
 [ext_resource type="Script" uid="uid://b67pou3odsjnu" path="res://scripts/jogos/estourador_silabas.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/fundo_estourador.svg" id="0_fundo"]
 [ext_resource type="Texture2D" uid="uid://dkixirmdu6rp5" path="res://assets/imagens/gato.png" id="2_d5ii5"]
 [ext_resource type="Texture2D" uid="uid://yk3nd487i0jt" path="res://assets/imagens/bola.png" id="3_q8yfi"]
 [ext_resource type="Texture2D" uid="uid://6xjo1w34h6i8" path="res://assets/imagens/foca.png" id="4_sgc3d"]
@@ -27,14 +28,16 @@ grow_vertical = 2
 script = ExtResource("1")
 imagens_das_palavras = Array[Texture2D]([ExtResource("2_d5ii5"), ExtResource("3_q8yfi"), ExtResource("4_sgc3d"), ExtResource("5_6e3p3"), ExtResource("6_42alv"), ExtResource("7_kmi5e"), ExtResource("15_okr0m"), ExtResource("16_c8s2f"), ExtResource("8_1snls"), ExtResource("9_d6vy4"), ExtResource("10_tjidu"), ExtResource("11_xvvet"), ExtResource("12_5iu0p"), ExtResource("13_o76gw"), ExtResource("14_u0uyq")])
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=885310612]
+[node name="Fundo" type="TextureRect" parent="." unique_id=885310612]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3882353, 0.32156864, 0.28627452, 1)
+texture = ExtResource("0_fundo")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="LabelMeta" type="Label" parent="." unique_id=1403905512]
 layout_mode = 1

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d01g8vw8bjft0"]
 
 [ext_resource type="Script" uid="uid://bs5ab65bcobeg" path="res://scripts/jogos/pista_letras.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/fundo_pista.svg" id="0_fundo"]
 
 [node name="PistaLetras" type="Control" unique_id=1249578308]
 layout_mode = 3
@@ -11,14 +12,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=2027092602]
+[node name="Fundo" type="TextureRect" parent="." unique_id=2027092602]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(2.5990605e-06, 0.47969198, 0.6380004, 1)
+texture = ExtResource("0_fundo")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="Instrucao" type="Label" parent="." unique_id=159458678]
 layout_mode = 1

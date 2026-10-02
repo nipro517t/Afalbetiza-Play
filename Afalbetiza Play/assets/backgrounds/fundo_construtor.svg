@@ -1,0 +1,31 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="skyConstrutor" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#8ec9f0"/>
+<stop offset="55%" stop-color="#cdeaf9"/>
+<stop offset="100%" stop-color="#fff3d0"/>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="800" fill="url(#skyConstrutor)"/>
+<circle cx="110" cy="100" r="60" fill="#fff1b8" opacity="0.9"/>
+<circle cx="110" cy="100" r="40" fill="#ffd95e"/>
+<g fill="#ffffff" opacity="0.9">
+<ellipse cx="980" cy="140" rx="66" ry="30"/>
+<ellipse cx="1038" cy="124" rx="48" ry="24"/>
+<ellipse cx="930" cy="128" rx="38" ry="20"/>
+</g>
+<path d="M0 640 Q300 580 600 640 T1200 640 V800 H0 Z" fill="#e3b778"/>
+<path d="M0 700 Q300 650 600 700 T1200 700 V800 H0 Z" fill="#c99456"/>
+<g>
+<rect x="40" y="650" width="70" height="70" rx="10" fill="#f2545b"/>
+<text x="75" y="698" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#ffffff">B</text>
+<rect x="120" y="665" width="60" height="60" rx="10" fill="#3a8fd1"/>
+<text x="150" y="706" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">O</text>
+</g>
+<g>
+<rect x="1090" y="650" width="70" height="70" rx="10" fill="#4fae5e"/>
+<text x="1125" y="698" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#ffffff">L</text>
+<rect x="1020" y="665" width="60" height="60" rx="10" fill="#f2a53a"/>
+<text x="1050" y="706" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">A</text>
+</g>
+</svg>

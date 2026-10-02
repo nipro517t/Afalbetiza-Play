@@ -12,12 +12,23 @@ extends Node
 ## 2. Acrescente uma entrada aqui embaixo.
 ## Não precisa mexer no MenuPrincipal.gd.
 
+## Pista das Letras saiu da lista (jogo de arrastar carrinho, nunca
+## chegou a ser terminado) — no lugar entraram os dois jogos de trator
+## abaixo. A cena (PistaLetras.tscn) e o script continuam no projeto,
+## só não aparecem mais no menu; apague os dois se tiver certeza que
+## não vai mais usar.
 var jogos: Array = [
 	{
-		"id": "pista_letras",
-		"nome": "Pista das Letras",
-		"cena": "res://scenes/jogos/PistaLetras.tscn",
-		"imagem": null, # troque por preload("res://assets/....png") quando tiver a arte
+		"id": "trator_infantil",
+		"nome": "Trator das Letras",
+		"cena": "res://scenes/jogos/TratorInfantil.tscn",
+		"imagem": null,
+	},
+	{
+		"id": "trator_fases",
+		"nome": "Trator das Letras — 36 Fases",
+		"cena": "res://scenes/jogos/TratorFases.tscn",
+		"imagem": null,
 	},
 	{
 		"id": "estourador_silabas",

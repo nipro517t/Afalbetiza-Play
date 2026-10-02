@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1mhlgf5ja67g"]
 
 [ext_resource type="Script" uid="uid://bypgdnphbyc8v" path="res://scripts/jogos/construtor_palavras.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/fundo_construtor.svg" id="0_fundo"]
 [ext_resource type="Texture2D" uid="uid://dkixirmdu6rp5" path="res://assets/imagens/gato.png" id="2_hndc2"]
 [ext_resource type="Texture2D" uid="uid://yk3nd487i0jt" path="res://assets/imagens/bola.png" id="3_v3l8t"]
 [ext_resource type="Texture2D" uid="uid://6xjo1w34h6i8" path="res://assets/imagens/foca.png" id="4_sw6y4"]
@@ -27,14 +28,16 @@ grow_vertical = 2
 script = ExtResource("1")
 imagens_das_palavras = Array[Texture2D]([ExtResource("2_hndc2"), ExtResource("3_v3l8t"), ExtResource("4_sw6y4"), ExtResource("5_anyrx"), ExtResource("6_4m4xm"), ExtResource("7_53165"), ExtResource("15_ppwmu"), ExtResource("16_j3h0t"), ExtResource("8_ccujw"), ExtResource("9_o7thq"), ExtResource("10_jsdkb"), ExtResource("11_8n0cb"), ExtResource("12_2kp5a"), ExtResource("13_t0lab"), ExtResource("14_24wgx")])
 
-[node name="Fundo" type="ColorRect" parent="." unique_id=711089134]
+[node name="Fundo" type="TextureRect" parent="." unique_id=711089134]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.12754911, 0.42966104, 9.62615e-08, 1)
+texture = ExtResource("0_fundo")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="LabelObjeto" type="Label" parent="." unique_id=140206237]
 layout_mode = 1

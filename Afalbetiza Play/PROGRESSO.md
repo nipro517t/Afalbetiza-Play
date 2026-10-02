@@ -7,12 +7,37 @@
 > do chat.
 
 ## Última atualização
-2026-09-22 — feito por Claude (conta atual), em cima da sua versão
-corrigida do zip (`afalbetiza_play_2026-comAsFotosCertas.zip`), **não**
-em cima do que o amigo fez na conta dele (aquele estava desatualizado
-e nunca puxou o GitHub Desktop antes de mexer).
+2026-10-01 — feito por Claude (conta atual), em cima do zip
+`Afalbetiza_Play.zip` que você mandou (já incluía o trabalho de
+perfil/turma/ranking de uma sessão anterior — não desfiz nada disso,
+só adicionei fundo nos 3 minijogos).
 
-## O que foi feito nesta sessão (4ª rodada — ajuste no ritmo do Estourador)
+## O que foi feito nesta sessão (5ª rodada — fundos dos minijogos)
+
+Pedido: "ajude em algumas coisas como criar e colocar um fundo nos
+jogos". Os 3 minijogos tinham só um `ColorRect` de cor lisa como fundo
+— criei 3 arquivos SVG novos (`assets/backgrounds/fundo_estourador.svg`,
+`fundo_construtor.svg`, `fundo_pista.svg`), no mesmo estilo visual do
+`fundo_menu.svg` que já existia (céu em gradiente, sol, nuvens), cada
+um com um tema/cor combinando com o jogo (bolhas pro Estourador, chão +
+blocos de letra pro Construtor, colinas + árvores pra Pista). Troquei o
+nó `Fundo` de `ColorRect` pra `TextureRect` apontando pra cada SVG, nas
+3 cenas (`EstouradorSilabas.tscn`, `ConstrutorPalavras.tscn`,
+`PistaLetras.tscn`) — nenhum script referenciava esse nó, então não
+precisou mexer em lógica nenhuma. As decorações de cada fundo ficam nas
+bordas/cantos, longe do texto e dos botões de cada jogo.
+
+De passagem, também corrigi um item desatualizado no `README.md` ("O
+que falta" ainda dizia que nada era salvo entre sessões, mas
+`PerfilJogador` já salva pontos em disco desde a sessão de
+perfil/ranking — só ninguém tinha voltado lá pra atualizar esse item).
+
+**Ainda não testei no Godot** (sem acesso ao editor aqui) — os SVGs
+são só retângulo/círculo/path simples, validados como XML válido, mas
+vale abrir o projeto e conferir visualmente se o enquadramento
+(`stretch_mode`) ficou do jeito esperado antes de dar como certo.
+
+## O que foi feito na sessão anterior (4ª rodada — ajuste no ritmo do Estourador)
 
 Balões nascendo em grupo (2 ou 3 juntos) tinha ficado difícil demais
 pra criança — **revertido**. `scripts/jogos/estourador_silabas.gd`
@@ -105,11 +130,16 @@ Os 4 itens acima foram cobertos nesta sessão, na sua versão do projeto.
 
 ## O que falta / próximos passos possíveis
 
-- **Testar no editor Godot 4.7** — essas mudanças foram feitas editando
-  os arquivos `.tscn`/`.gd` diretamente (fora do editor), então abra o
-  projeto e dê F5 antes de exportar pro Android, só pra conferir que o
-  `TabContainer` e os `OptionButton` renderizam do jeito esperado no
-  seu tema/resolução.
+- **Testar no editor Godot 4.7** — essas mudanças (aqui e nas sessões
+  anteriores) foram feitas editando os arquivos `.tscn`/`.gd`
+  diretamente (fora do editor), então abra o projeto e dê F5 antes de
+  exportar pro Android: confira o `TabContainer`/`OptionButton` da
+  tela de perfil **e** o enquadramento dos 3 fundos novos dos
+  minijogos (`stretch_mode` do `TextureRect` "Fundo").
+- Os fundos dos minijogos são SVGs simples (céu, sol, blocos/árvores
+  decorativas) — dá pra trocar por arte final depois só substituindo o
+  arquivo em `assets/backgrounds/` com o mesmo nome, sem mexer em
+  script nenhum.
 - **Editar a lista de turmas** se `TURMAS_DISPONIVEIS`
   (`scripts/core/perfil_jogador.gd`) não bater com as turmas reais da
   escola — hoje é Maternal I/II, Jardim I/II, 1º ao 3º Ano.
