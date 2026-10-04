@@ -12,6 +12,25 @@
 perfil/turma/ranking de uma sessão anterior — não desfiz nada disso,
 só adicionei fundo nos 3 minijogos).
 
+## O que foi feito nesta sessão (6ª rodada — sons + pódio do ranking)
+
+- `AudioManager` agora toca de verdade: música de fundo em loop,
+  estouro de balão (sorteia entre `estouro_1..3`, 4 vozes simultâneas) e
+  vitória com volume 0.7 (-30%). `process_mode = ALWAYS` pra não calar
+  quando a tela de recompensa pausa a árvore.
+- `MinigameBase.concluir(estrelas, venceu = true)`: toca vitória só se
+  `venceu`; Estourador e Construtor chamam `concluir(1, false)` na derrota.
+- `estourador_silabas.gd`: `AudioManager.tocar_estouro()` a cada toque
+  em balão.
+- `tela_ranking.gd`: 1º arco-íris animado, 2º prata, 3º bronze.
+- 7ª rodada: botão de sons no menu (`painel_sons.gd`) com
+  "Som de fundo" e "Efeitos sonoros" (salvo em `user://config_som.cfg`);
+  2º lugar do ranking agora prata forte (cor clara + contorno de aço).
+  Estouro continua sorteando entre os 3 sons (testado: ~1/3 cada).
+- Pendente: locuções e sfx de acerto/erro (sem arquivo ainda). O
+  `assets/WhatsApp Audio ... .mp4` tem a mesma duração de `vitoria.ogg`
+  e não é usado por nenhum script.
+
 ## O que foi feito nesta sessão (5ª rodada — fundos dos minijogos)
 
 Pedido: "ajude em algumas coisas como criar e colocar um fundo nos

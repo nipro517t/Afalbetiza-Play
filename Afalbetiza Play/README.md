@@ -78,10 +78,13 @@ partida. A tela de recompensa, por exemplo, aparece sozinha — nenhum
 minijogo instancia ela na mão.
 
 **3. `AudioManager` é o único lugar que sabe tocar som.**
-Hoje ele só imprime no console (`[AudioManager] tocaria som: ...`)
-porque ainda não há áudios prontos. Quando as locuções e efeitos
-sonoros estiverem gravados, é só preencher as funções desse arquivo —
-nenhum minijogo precisa mudar.
+Hoje ele toca a música de fundo (loop), o estouro de balão (3 sons
+sorteados, `tocar_estouro()`) e a vitória (`tocar_vitoria()`, chamada
+por `concluir(estrelas)` — passe `concluir(estrelas, false)` na derrota
+pra ficar sem som). Dois interruptores ("Som de fundo" e "Efeitos sonoros", `definir_musica_ativa()` / `definir_efeitos_ativos()`) ficam salvos em `user://config_som.cfg`. Volumes ficam nas constantes `VOLUME_*` no topo do
+arquivo (vitória está a 0.7, ou seja, 30% mais baixa). Locuções e sfx de
+acerto/erro continuam sem arquivo — as funções existem e não tocam nada
+até as gravações chegarem; nenhum minijogo precisa mudar.
 
 **4. Poucas cenas, cada uma com um papel bem definido.**
 No total: o menu, a tela de recompensa (compartilhada), 3 minijogos e 1
@@ -435,3 +438,17 @@ relativa só àquela turma, não ao ranking geral.
 - Persistência de **estrelas por minijogo** (hoje `PerfilJogador` salva
   pontos por cena jogada, mas não a quantidade de estrelas/resultado de
   cada partida).
+
+## Ranking: pódio colorido
+Na `TelaRanking`, o nickname do 1º lugar usa `RichTextLabel` com
+`[rainbow]` (cores animadas), o 2º é prateado e o 3º marrom/bronze
+(`COR_PRATA` com contorno de aço / `COR_BRONZE` em `tela_ranking.gd`). Do 4º em diante o
+`Label` segue igual. A posição é relativa à lista exibida (com filtro
+de turma, o pódio é da turma).
+
+## Botão de sons no menu
+`scripts/ui/painel_sons.gd` monta (por código) um botão com ícone de
+alto-falante no canto superior direito do `MenuPrincipal`. Ele abre um
+painel com dois interruptores: **Som de fundo** e **Efeitos sonoros**.
+O ícone vira "X" quando os dois estão desligados. O estado mora no
+`AudioManager` e persiste entre aberturas do app.

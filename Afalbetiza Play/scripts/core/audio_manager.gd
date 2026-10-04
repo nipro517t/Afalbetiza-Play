@@ -1,39 +1,167 @@
 extends Node
 ## Autoload "AudioManager".
 ##
-## Ponto único por onde todo som do app passa. Por enquanto só avisa no
-## console (Output) — quando os áudios finais estiverem prontos, é só
-## trocar o miolo de cada função aqui por um AudioStreamPlayer tocando
-## o arquivo de verdade. Nenhum minijogo precisa mudar.
+## Ponto único por onde todo som do app passa. Nenhum minijogo cria
+## AudioStreamPlayer por conta própria — chama uma das funções abaixo.
+##
+## Sons ligados:
+## - música de fundo (assets/sons/som de fundo.ogg) — toca em loop desde
+##   que o app abre, em todas as telas;
+## - estouro de balão (assets/sons/estouroBalao/estouro_1..3.ogg) — um
+##   dos três sorteado a cada balão tocado;
+## - vitória (assets/sons/vitoria.ogg) — toca quando a criança VENCE o
+##   minijogo (derrota fica em silêncio, de propósito).
+##
+## Locuções e sfx de acerto/erro ainda não têm arquivo: as funções
+## existem (os minijogos já chamam), só não tocam nada por enquanto.
+##
+## Liga/desliga (botão de sons no menu principal): "som de fundo" e
+## "efeitos sonoros" são independentes e a escolha fica salva em
+## user://config_som.cfg, então vale também na próxima vez que o app abrir.
+##
+## Volumes: tudo em escala linear (1.0 = volume original do arquivo).
+## Pra mexer no volume de algum som, é só trocar a constante abaixo.
 
-var _sfx_player: AudioStreamPlayer
+## var (e não const) porque o loop é ligado por código em _ready().
+var _musica_fundo: AudioStreamOggVorbis = preload("res://assets/sons/som de fundo.ogg")
+const SOM_VITORIA := preload("res://assets/sons/vitoria.ogg")
+const SONS_ESTOURO: Array[AudioStream] = [
+	preload("res://assets/sons/estouroBalao/estouro_1.ogg"),
+	preload("res://assets/sons/estouroBalao/estouro_2.ogg"),
+	preload("res://assets/sons/estouroBalao/estouro_3.ogg"),
+]
+
+const VOLUME_MUSICA := 0.4
+const VOLUME_ESTOURO := 1.0
+## Vitória estava alta demais: 30% mais baixo (1.0 - 0.30 = 0.70).
+const VOLUME_VITORIA := 0.7
+
+## Quantos estouros podem soar ao mesmo tempo (balões estourados em
+## sequência rápida não cortam um ao outro).
+const VOZES_ESTOURO := 4
+
+const ARQUIVO_CONFIG := "user://config_som.cfg"
+
+## Lidas pelo painel de sons do menu; mude só via definir_*().
+var musica_ativa: bool = true
+var efeitos_ativos: bool = true
+
+var _musica_player: AudioStreamPlayer
+var _vitoria_player: AudioStreamPlayer
 var _voz_player: AudioStreamPlayer
+var _estouro_players: Array[AudioStreamPlayer] = []
+var _proximo_estouro: int = 0
+var _ultimo_estouro: int = -1
 
 
 func _ready() -> void:
-	_sfx_player = AudioStreamPlayer.new()
-	_voz_player = AudioStreamPlayer.new()
-	add_child(_sfx_player)
-	add_child(_voz_player)
+	# A tela de recompensa pausa a árvore; sem isso a música e o som
+	# de vitória parariam junto com o jogo.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	_musica_player = _criar_player(VOLUME_MUSICA)
+	_vitoria_player = _criar_player(VOLUME_VITORIA)
+	_voz_player = _criar_player(1.0)
+	for i in VOZES_ESTOURO:
+		_estouro_players.append(_criar_player(VOLUME_ESTOURO))
+
+	# O .import do arquivo vem com loop=false; liga o loop por código
+	# pra música não ficar muda depois dos ~68 s.
+	_musica_fundo.loop = true
+	_musica_player.stream = _musica_fundo
+
+	_carregar_config()
+	_aplicar_musica()
 
 
-## Efeito sonoro de acerto (ex: pop, sino, palminhas).
+## Liga/desliga a música de fundo (pausa e retoma de onde parou).
+func definir_musica_ativa(ativa: bool) -> void:
+	musica_ativa = ativa
+	_aplicar_musica()
+	_salvar_config()
+
+
+## Liga/desliga todos os efeitos sonoros (estouro, vitória, e os sfx
+## que ainda vão entrar). Corta na hora o que estiver tocando.
+func definir_efeitos_ativos(ativos: bool) -> void:
+	efeitos_ativos = ativos
+	if not ativos:
+		_vitoria_player.stop()
+		_voz_player.stop()
+		for player in _estouro_players:
+			player.stop()
+	_salvar_config()
+
+
+func _aplicar_musica() -> void:
+	if musica_ativa:
+		_musica_player.stream_paused = false
+		if not _musica_player.playing:
+			_musica_player.play()
+	else:
+		_musica_player.stream_paused = true
+
+
+func _carregar_config() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(ARQUIVO_CONFIG) != OK:
+		return
+	musica_ativa = bool(cfg.get_value("som", "musica", true))
+	efeitos_ativos = bool(cfg.get_value("som", "efeitos", true))
+
+
+func _salvar_config() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("som", "musica", musica_ativa)
+	cfg.set_value("som", "efeitos", efeitos_ativos)
+	cfg.save(ARQUIVO_CONFIG)
+
+
+func _criar_player(volume_linear: float) -> AudioStreamPlayer:
+	var player := AudioStreamPlayer.new()
+	player.volume_linear = volume_linear
+	add_child(player)
+	return player
+
+
+## Estouro de balão — sorteia um dos 3 sons (nunca o mesmo duas vezes
+## seguidas, pra não soar repetitivo).
+func tocar_estouro() -> void:
+	if not efeitos_ativos:
+		return
+	var indice := randi() % SONS_ESTOURO.size()
+	if indice == _ultimo_estouro:
+		indice = (indice + 1) % SONS_ESTOURO.size()
+	_ultimo_estouro = indice
+
+	var player := _estouro_players[_proximo_estouro]
+	_proximo_estouro = (_proximo_estouro + 1) % _estouro_players.size()
+	player.stream = SONS_ESTOURO[indice]
+	player.play()
+
+
+## Som de vitória do minijogo (já com -30% de volume, ver VOLUME_VITORIA).
+func tocar_vitoria() -> void:
+	if not efeitos_ativos:
+		return
+	_vitoria_player.stream = SOM_VITORIA
+	_vitoria_player.play()
+
+
+## Efeito sonoro de acerto. Ainda sem arquivo — o Estourador usa
+## tocar_estouro() no lugar. Preencha quando tiver o som.
 func tocar_sfx_acerto() -> void:
-	_avisar("sfx acerto")
+	pass
 
 
-## Efeito sonoro de erro — sempre suave, nunca punitivo.
+## Efeito sonoro de erro — sempre suave, nunca punitivo. Ainda sem arquivo.
 func tocar_sfx_erro() -> void:
-	_avisar("sfx erro")
+	pass
 
 
 ## Locução de voz. "id" identifica qual frase tocar (ex: instrução de
-## um minijogo específico) — troque por um dicionário id -> AudioStream
-## quando as gravações estiverem prontas.
-func tocar_locucao(id: String) -> void:
-	_avisar("locução: " + id)
-
-
-func _avisar(nome: String) -> void:
-	# TODO: substituir por reprodução real de áudio.
-	print("[AudioManager] tocaria som: ", nome)
+## um minijogo). Ainda sem gravações — quando existirem, troque por um
+## dicionário id -> AudioStream e toque em _voz_player.
+func tocar_locucao(_id: String) -> void:
+	# Quando houver gravações: respeite efeitos_ativos aqui também.
+	pass

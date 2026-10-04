@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ct8x6b06vsffd"
+path="res://.godot/imported/som de fundo.ogg-0b56acb76fef5fdd4ec6e699dc2db164.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sons/som de fundo.ogg"
+dest_files=["res://.godot/imported/som de fundo.ogg-0b56acb76fef5fdd4ec6e699dc2db164.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

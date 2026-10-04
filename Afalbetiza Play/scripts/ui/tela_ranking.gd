@@ -13,6 +13,11 @@ extends Control
 @onready var _rolagem: ScrollContainer = $Rolagem
 @onready var _filtro_turma: OptionButton = $FiltroTurma
 
+## Cores dos nicknames do pódio (1º é arco-íris, feito por código).
+const COR_PRATA := Color(0.86, 0.89, 0.95)
+const COR_CONTORNO_PRATA := Color(0.25, 0.29, 0.38)
+const COR_BRONZE := Color(0.72, 0.45, 0.22)
+
 var _ranking_completo: Array = []
 
 
@@ -80,11 +85,7 @@ func _criar_linha(posicao: int, nome: String, turma: String, pontos: int) -> Con
 	label_posicao.custom_minimum_size = Vector2(50, 0)
 	linha.add_child(label_posicao)
 
-	var label_nome := Label.new()
-	label_nome.text = nome
-	label_nome.custom_minimum_size = Vector2(220, 0)
-	label_nome.clip_text = true
-	linha.add_child(label_nome)
+	linha.add_child(_criar_nome(posicao, nome))
 
 	var label_turma := Label.new()
 	label_turma.text = turma
@@ -99,6 +100,47 @@ func _criar_linha(posicao: int, nome: String, turma: String, pontos: int) -> Con
 	linha.add_child(label_pontos)
 
 	return linha
+
+
+## Nickname do ranking: 1º = arco-íris animado, 2º = prateado,
+## 3º = marrom/bronze, do 4º em diante = Label normal, sem enfeite.
+func _criar_nome(posicao: int, nome: String) -> Control:
+	if posicao == 1:
+		return _criar_nome_arco_iris(nome)
+
+	var label_nome := Label.new()
+	label_nome.text = nome
+	label_nome.custom_minimum_size = Vector2(220, 0)
+	label_nome.clip_text = true
+	if posicao == 2:
+		# Prata forte: cor clara metálica + contorno de aço, pra não se
+		# confundir com o cinza padrão do texto.
+		label_nome.add_theme_color_override("font_color", COR_PRATA)
+		label_nome.add_theme_color_override("font_outline_color", COR_CONTORNO_PRATA)
+		label_nome.add_theme_constant_override("outline_size", 3)
+	elif posicao == 3:
+		label_nome.add_theme_color_override("font_color", COR_BRONZE)
+	return label_nome
+
+
+## O efeito [rainbow] do RichTextLabel faz as cores correrem pelas
+## letras sozinho (animado). A fonte e o tamanho são copiados do Label
+## padrão do tema pra ficar idêntico aos outros nomes da lista.
+func _criar_nome_arco_iris(nome: String) -> Control:
+	var rotulo := RichTextLabel.new()
+	rotulo.bbcode_enabled = true
+	rotulo.fit_content = true
+	rotulo.scroll_active = false
+	rotulo.autowrap_mode = TextServer.AUTOWRAP_OFF
+	rotulo.clip_contents = true
+	rotulo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rotulo.custom_minimum_size = Vector2(220, 0)
+	rotulo.add_theme_font_override("normal_font", get_theme_font("font", "Label"))
+	rotulo.add_theme_font_size_override("normal_font_size", get_theme_font_size("font_size", "Label"))
+	# "[" no nome da criança não pode virar tag BBCode.
+	var nome_seguro := nome.replace("[", "[lb]")
+	rotulo.text = "[rainbow freq=0.35 sat=0.8 val=1.0 speed=1.0]%s[/rainbow]" % nome_seguro
+	return rotulo
 
 
 func _on_botao_voltar_pressed() -> void:

@@ -157,7 +157,7 @@ func _finalizar_por_vitoria() -> void:
 
 func _finalizar_por_derrota() -> void:
 	_jogo_ativo = false
-	concluir(1)
+	concluir(1, false)
 
 
 func _atualizar_vidas() -> void:

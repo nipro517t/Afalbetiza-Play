@@ -15,6 +15,8 @@ extends Control
 @onready var botao_direita: Button = $Carrossel/BotaoDireita
 @onready var _label_jogador: Label = $LabelJogador
 
+const PAINEL_SONS := preload("res://scripts/ui/painel_sons.gd")
+
 var indice_atual: int = 0
 
 ## Cada item: { "nome": String, "cena": String (res://...), "imagem": Texture2D }
@@ -27,6 +29,9 @@ func _ready() -> void:
 	indice_atual = 0
 	atualizar_card()
 	_atualizar_label_jogador()
+	# Botão de sons (som de fundo / efeitos sonoros), canto superior
+	# direito. Adicionado por último pra ficar por cima de tudo.
+	add_child(PAINEL_SONS.new())
 
 
 ## Mostra quem está jogando agora (definido em TelaNomeJogador), pra
@@ -54,7 +59,7 @@ func atualizar_card() -> void:
 
 	var jogo: Dictionary = lista_jogos[indice_atual]
 	titulo_jogo.text = jogo["nome"]
-	card_central.texture_normal = jogo["imagem"]
+	card_central.texture_normal = load(jogo["imagem"]) as Texture2D
 
 
 func _on_botao_esquerda_pressed() -> void:

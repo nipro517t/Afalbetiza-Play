@@ -22,24 +22,24 @@ var jogos: Array = [
 		"id": "trator_infantil",
 		"nome": "Trator das Letras",
 		"cena": "res://scenes/jogos/TratorInfantil.tscn",
-		"imagem": null,
+		"imagem": "res://assets/CAPAparajogos/tratorDasLetras.jpeg",
 	},
 	{
 		"id": "trator_fases",
 		"nome": "Trator das Letras — 36 Fases",
 		"cena": "res://scenes/jogos/TratorFases.tscn",
-		"imagem": null,
+		"imagem": "res://assets/CAPAparajogos/tratorDasletras36Fasespal.jpeg",
 	},
 	{
 		"id": "estourador_silabas",
 		"nome": "Estourador de Sílabas",
 		"cena": "res://scenes/jogos/EstouradorSilabas.tscn",
-		"imagem": null,
+		"imagem": "res://assets/CAPAparajogos/estourarSilabras.jpeg",
 	},
 	{
 		"id": "construtor_palavras",
 		"nome": "Construtor de Palavras",
 		"cena": "res://scenes/jogos/ConstrutorPalavras.tscn",
-		"imagem": null,
+		"imagem": "res://assets/CAPAparajogos/formarPalavras.jpeg",
 	},
 ]

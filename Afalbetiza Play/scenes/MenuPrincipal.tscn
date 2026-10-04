@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://r0l6vpd67vnk" path="res://assets/backgrounds/fundo_menu.svg" id="2_ysajj"]
 [ext_resource type="FontFile" uid="uid://csg68wtfq3o4a" path="res://assets/fonts/BoldPixels.ttf" id="3_cjknc"]
 [ext_resource type="Texture2D" uid="uid://y0r381gk3ls5" path="res://assets/setas.png" id="3_q4epk"]
+[ext_resource type="Script" uid="uid://ucl4uqa6o0lg" path="res://scripts/aumentar_card.gd" id="4_f5jwn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cjknc"]
 atlas = ExtResource("3_q4epk")
@@ -125,8 +126,12 @@ offset_right = 300.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(293, 200)
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="Node" type="Node" parent="Carrossel/CardCentral" unique_id=1855191190]
+script = ExtResource("4_f5jwn")
 
 [node name="TituloJogo" type="Label" parent="Carrossel" unique_id=232084196]
 layout_mode = 0

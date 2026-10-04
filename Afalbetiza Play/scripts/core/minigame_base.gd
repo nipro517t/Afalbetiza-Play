@@ -12,7 +12,8 @@ extends Control
 ## - Sobrescreva _iniciar() para preparar a primeira rodada / tocar a
 ##   instrução de voz.
 ## - Chame registrar_acerto() / registrar_erro() conforme a criança joga.
-## - Chame concluir(estrelas) quando o minijogo tiver acabado.
+## - Chame concluir(estrelas) quando o minijogo tiver acabado
+##   (concluir(estrelas, false) se foi derrota — sem som de vitória).
 ## - Se a cena tiver um botão "BotaoVoltar", conecte o sinal "pressed"
 ##   dele ao método _on_botao_voltar_pressed (já pronto aqui embaixo).
 
@@ -52,8 +53,12 @@ func registrar_erro() -> void:
 ## qtd_estrelas vai de 0 a 3. Também salva os pontos feitos nessa
 ## partida no perfil da criança atual (PerfilJogador) — cada minijogo
 ## não precisa fazer isso na mão, já sai pronto aqui.
-func concluir(qtd_estrelas: int) -> void:
+## venceu = true toca o som de vitória; passe false na derrota (fim por
+## falta de vidas) pra ficar em silêncio.
+func concluir(qtd_estrelas: int, venceu: bool = true) -> void:
 	estrelas = clamp(qtd_estrelas, 0, 3)
+	if venceu:
+		AudioManager.tocar_vitoria()
 	jogo_concluido.emit(estrelas)
 	PerfilJogador.adicionar_pontos(scene_file_path, pontos)
 	var tela = TELA_RECOMPENSA.instantiate()

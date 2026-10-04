@@ -154,6 +154,7 @@ func _on_balao_tocada(balao: Balao) -> void:
 	if not _jogo_ativo:
 		return
 
+	AudioManager.tocar_estouro()
 	var silaba_tocada := balao.obter_silaba()
 	var eh_correta: bool = silaba_tocada == _item_atual()["correta"]
 
@@ -184,7 +185,7 @@ func _finalizar_por_vitoria() -> void:
 
 func _finalizar_por_derrota() -> void:
 	_encerrar_rodada()
-	concluir(1)
+	concluir(1, false)
 
 
 ## Comum aos dois finais: para de spawnar e tira da tela qualquer balão
