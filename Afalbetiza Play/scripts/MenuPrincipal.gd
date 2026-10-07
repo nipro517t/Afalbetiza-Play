@@ -19,7 +19,7 @@ const PAINEL_SONS := preload("res://scripts/ui/painel_sons.gd")
 
 var indice_atual: int = 0
 
-## Cada item: { "nome": String, "cena": String (res://...), "imagem": Texture2D }
+## Cada item: { "nome": String, "imagem": String, e "cena" (res://...) OU "url" }
 var lista_jogos: Array = []
 
 
@@ -79,7 +79,12 @@ func _on_botao_direita_pressed() -> void:
 func _on_card_central_pressed() -> void:
 	if lista_jogos.is_empty():
 		return
-	var cena: String = lista_jogos[indice_atual]["cena"]
+	var jogo: Dictionary = lista_jogos[indice_atual]
+	# Jogo de navegador: abre o link direto, sem passar por cena.
+	if jogo.has("url"):
+		OS.shell_open(jogo["url"])
+		return
+	var cena: String = jogo["cena"]
 	if ResourceLoader.exists(cena):
 		get_tree().change_scene_to_file(cena)
 	else:

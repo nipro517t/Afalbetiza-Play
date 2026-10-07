@@ -31,7 +31,6 @@ extends MinigameBase
 @onready var _imagem_objeto: TextureRect = $ImagemObjeto
 @onready var _slots_container: HBoxContainer = $Slots
 @onready var _opcoes_container: HBoxContainer = $Opcoes
-@onready var _vidas: Array = [$Vidas/Vida1, $Vidas/Vida2, $Vidas/Vida3]
 
 var _banco_palavras: Array = [
 	{"palavra": "GATO", "silabas": ["GA", "TO"]},
@@ -66,7 +65,7 @@ var _jogo_ativo: bool = true
 func _iniciar() -> void:
 	_gerar_ordem_sorteada()
 	_indice_atual = 0
-	_vidas_restantes = 3
+	_vidas_restantes = VIDAS_INICIAIS
 	_jogo_ativo = true
 	_atualizar_vidas()
 	_carregar_palavra()
@@ -161,8 +160,7 @@ func _finalizar_por_derrota() -> void:
 
 
 func _atualizar_vidas() -> void:
-	for i in _vidas.size():
-		_vidas[i].color = Color(1, 0.85, 0.2) if i < _vidas_restantes else Color(0.3, 0.3, 0.3, 0.4)
+	atualizar_vidas_hud(_vidas_restantes)
 
 
 ## Mostra a imagem correspondente ao índice do banco de palavras (não ao

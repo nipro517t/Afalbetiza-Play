@@ -21,13 +21,47 @@ signal jogo_concluido(estrelas: int)
 
 const TELA_RECOMPENSA := preload("res://scenes/ui/TelaRecompensa.tscn")
 
+const HUD_ESTRELAS := preload("res://scripts/ui/hud_estrelas.gd")
+const HUD_VIDAS := preload("res://scripts/ui/hud_vidas.gd")
+
+## Vidas com que todo minijogo começa (errou = perde 1).
+const VIDAS_INICIAIS := 3
+
 var estrelas: int = 3
 var pontos: int = 0
+
+var _hud_estrelas: Control
+var _hud_vidas: Control
 
 
 func _ready() -> void:
 	get_tree().paused = false
+	_criar_hud()
 	_iniciar()
+
+
+## HUD padrão de todo minijogo, montado por código: estrela + número no
+## canto superior esquerdo e corações de vida no canto superior direito.
+## Os jogos não criam nem mexem nisso direto — usam registrar_acerto()
+## e atualizar_vidas_hud().
+func _criar_hud() -> void:
+	# Remove os quadrados antigos (vidas) e o "PONTOS: N" antigo, caso
+	# ainda estejam na cena — assim não precisa apagar na mão.
+	for nome in ["LabelPontos", "Vidas"]:
+		var antigo := get_node_or_null(nome)
+		if antigo:
+			antigo.queue_free()
+	_hud_estrelas = HUD_ESTRELAS.new()
+	add_child(_hud_estrelas)
+	_hud_vidas = HUD_VIDAS.new()
+	_hud_vidas.total = VIDAS_INICIAIS
+	add_child(_hud_vidas)
+
+
+## Chame sempre que as vidas mudarem (início do jogo e a cada erro).
+func atualizar_vidas_hud(restantes: int) -> void:
+	if _hud_vidas:
+		_hud_vidas.definir(restantes)
 
 
 ## Sobrescreva esta função no script do minijogo específico.
@@ -39,6 +73,7 @@ func _iniciar() -> void:
 ## sozinho se quer somar pontos, avançar de fase etc.
 func registrar_acerto(pontos_ganhos: int = 10) -> void:
 	pontos += pontos_ganhos
+	_hud_estrelas.definir(pontos)
 	AudioManager.tocar_sfx_acerto()
 
 
@@ -63,7 +98,7 @@ func concluir(qtd_estrelas: int, venceu: bool = true) -> void:
 	PerfilJogador.adicionar_pontos(scene_file_path, pontos)
 	var tela = TELA_RECOMPENSA.instantiate()
 	add_child(tela)
-	tela.configurar(estrelas)
+	tela.configurar(estrelas, venceu)
 
 
 ## Botão "voltar ao menu" comum a todos os minijogos. Basta ter um

@@ -15,9 +15,9 @@ extends Node
 ## Locuções e sfx de acerto/erro ainda não têm arquivo: as funções
 ## existem (os minijogos já chamam), só não tocam nada por enquanto.
 ##
-## Liga/desliga (botão de sons no menu principal): "som de fundo" e
-## "efeitos sonoros" são independentes e a escolha fica salva em
-## user://config_som.cfg, então vale também na próxima vez que o app abrir.
+## Liga/desliga (botão de som no menu principal): UM único interruptor
+## que liga ou desliga TODOS os sons (música + efeitos). A escolha fica
+## salva em user://config_som.cfg e vale na próxima vez que o app abrir.
 ##
 ## Volumes: tudo em escala linear (1.0 = volume original do arquivo).
 ## Pra mexer no volume de algum som, é só trocar a constante abaixo.
@@ -42,9 +42,8 @@ const VOZES_ESTOURO := 4
 
 const ARQUIVO_CONFIG := "user://config_som.cfg"
 
-## Lidas pelo painel de sons do menu; mude só via definir_*().
-var musica_ativa: bool = true
-var efeitos_ativos: bool = true
+## Lida pelo botão de som do menu; mude só via definir_som_ativo().
+var som_ativo: bool = true
 
 var _musica_player: AudioStreamPlayer
 var _vitoria_player: AudioStreamPlayer
@@ -74,18 +73,12 @@ func _ready() -> void:
 	_aplicar_musica()
 
 
-## Liga/desliga a música de fundo (pausa e retoma de onde parou).
-func definir_musica_ativa(ativa: bool) -> void:
-	musica_ativa = ativa
+## Liga/desliga TODOS os sons. Desligando, pausa a música (retoma de onde
+## parou) e corta na hora qualquer efeito que esteja tocando.
+func definir_som_ativo(ativo: bool) -> void:
+	som_ativo = ativo
 	_aplicar_musica()
-	_salvar_config()
-
-
-## Liga/desliga todos os efeitos sonoros (estouro, vitória, e os sfx
-## que ainda vão entrar). Corta na hora o que estiver tocando.
-func definir_efeitos_ativos(ativos: bool) -> void:
-	efeitos_ativos = ativos
-	if not ativos:
+	if not ativo:
 		_vitoria_player.stop()
 		_voz_player.stop()
 		for player in _estouro_players:
@@ -94,7 +87,7 @@ func definir_efeitos_ativos(ativos: bool) -> void:
 
 
 func _aplicar_musica() -> void:
-	if musica_ativa:
+	if som_ativo:
 		_musica_player.stream_paused = false
 		if not _musica_player.playing:
 			_musica_player.play()
@@ -106,14 +99,12 @@ func _carregar_config() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(ARQUIVO_CONFIG) != OK:
 		return
-	musica_ativa = bool(cfg.get_value("som", "musica", true))
-	efeitos_ativos = bool(cfg.get_value("som", "efeitos", true))
+	som_ativo = bool(cfg.get_value("som", "ativo", true))
 
 
 func _salvar_config() -> void:
 	var cfg := ConfigFile.new()
-	cfg.set_value("som", "musica", musica_ativa)
-	cfg.set_value("som", "efeitos", efeitos_ativos)
+	cfg.set_value("som", "ativo", som_ativo)
 	cfg.save(ARQUIVO_CONFIG)
 
 
@@ -127,7 +118,7 @@ func _criar_player(volume_linear: float) -> AudioStreamPlayer:
 ## Estouro de balão — sorteia um dos 3 sons (nunca o mesmo duas vezes
 ## seguidas, pra não soar repetitivo).
 func tocar_estouro() -> void:
-	if not efeitos_ativos:
+	if not som_ativo:
 		return
 	var indice := randi() % SONS_ESTOURO.size()
 	if indice == _ultimo_estouro:
@@ -142,7 +133,7 @@ func tocar_estouro() -> void:
 
 ## Som de vitória do minijogo (já com -30% de volume, ver VOLUME_VITORIA).
 func tocar_vitoria() -> void:
-	if not efeitos_ativos:
+	if not som_ativo:
 		return
 	_vitoria_player.stream = SOM_VITORIA
 	_vitoria_player.play()
@@ -163,5 +154,5 @@ func tocar_sfx_erro() -> void:
 ## um minijogo). Ainda sem gravações — quando existirem, troque por um
 ## dicionário id -> AudioStream e toque em _voz_player.
 func tocar_locucao(_id: String) -> void:
-	# Quando houver gravações: respeite efeitos_ativos aqui também.
+	# Quando houver gravações: respeite som_ativo aqui também.
 	pass

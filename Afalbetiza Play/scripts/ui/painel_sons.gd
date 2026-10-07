@@ -1,15 +1,12 @@
 extends Control
-## Botão de sons do menu principal (canto superior direito) + painel
-## com os dois interruptores: "Som de fundo" e "Efeitos sonoros".
+## Botão de som do menu principal (canto superior direito).
+## Um toque liga ou desliga TODOS os sons (música + efeitos) — sem painel,
+## sem escolher qual som. O estado real mora no autoload AudioManager e é
+## salvo em disco por ele; este script só mostra e muda.
 ##
-## Tudo é montado por código aqui dentro, então o menu só precisa fazer
-## add_child(PainelSons.new()) — veja MenuPrincipal.gd. O estado real
-## (ligado/desligado) mora no autoload AudioManager e é salvo em disco
-## por ele; este script só mostra e muda.
+## Continua sendo usado como antes: add_child(PainelSons.new()) no menu.
 
 
-## Ícone de alto-falante desenhado por código (não depende de fonte
-## nem de imagem). Com tudo desligado, troca as ondinhas por um "X".
 class IconeSom extends Control:
 	var mudo: bool = false
 
@@ -38,19 +35,15 @@ class IconeSom extends Control:
 			draw_arc(c + Vector2(2, 0) * u, 36.0 * u, -0.8, 0.8, 16, branco, 6.0 * u, true)
 
 
+
 var _icone: IconeSom
-var _painel: Control
-var _check_fundo: CheckButton
-var _check_efeitos: CheckButton
 
 
 func _ready() -> void:
-	# Ocupa a tela toda mas não rouba toque de ninguém (só os filhos
-	# interativos pegam toque).
+	# Ocupa a tela toda mas não rouba toque de ninguém (só o botão pega toque).
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_montar_botao()
-	_montar_painel()
 	_atualizar_icone()
 
 
@@ -72,84 +65,10 @@ func _montar_botao() -> void:
 	botao.add_child(_icone)
 
 
-func _montar_painel() -> void:
-	# Fundo escuro que cobre o menu e bloqueia toque no que está atrás.
-	_painel = ColorRect.new()
-	_painel.color = Color(0, 0, 0, 0.6)
-	_painel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_painel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_painel.visible = false
-	add_child(_painel)
-
-	var centro := CenterContainer.new()
-	centro.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_painel.add_child(centro)
-
-	var caixa := PanelContainer.new()
-	caixa.custom_minimum_size = Vector2(560, 0)
-	centro.add_child(caixa)
-
-	var margem := MarginContainer.new()
-	for lado in ["margin_left", "margin_right", "margin_top", "margin_bottom"]:
-		margem.add_theme_constant_override(lado, 28)
-	caixa.add_child(margem)
-
-	var coluna := VBoxContainer.new()
-	coluna.add_theme_constant_override("separation", 18)
-	margem.add_child(coluna)
-
-	var titulo := Label.new()
-	titulo.text = "SONS"
-	titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	titulo.add_theme_font_size_override("font_size", 44)
-	coluna.add_child(titulo)
-
-	_check_fundo = _criar_interruptor("Som de fundo", AudioManager.musica_ativa)
-	_check_fundo.toggled.connect(_on_fundo_toggled)
-	coluna.add_child(_check_fundo)
-
-	_check_efeitos = _criar_interruptor("Efeitos sonoros", AudioManager.efeitos_ativos)
-	_check_efeitos.toggled.connect(_on_efeitos_toggled)
-	coluna.add_child(_check_efeitos)
-
-	var fechar := Button.new()
-	fechar.text = "FECHAR"
-	fechar.custom_minimum_size = Vector2(0, 56)
-	fechar.add_theme_font_size_override("font_size", 28)
-	fechar.pressed.connect(_on_fechar_pressed)
-	coluna.add_child(fechar)
-
-
-## Importante: button_pressed é definido ANTES de conectar o sinal
-## toggled, pra abrir o painel não disparar uma troca sem querer.
-func _criar_interruptor(texto: String, ligado: bool) -> CheckButton:
-	var check := CheckButton.new()
-	check.text = texto
-	check.button_pressed = ligado
-	check.custom_minimum_size = Vector2(0, 64)
-	check.add_theme_font_size_override("font_size", 32)
-	return check
-
-
 func _atualizar_icone() -> void:
-	_icone.atualizar(not AudioManager.musica_ativa and not AudioManager.efeitos_ativos)
+	_icone.atualizar(not AudioManager.som_ativo)
 
 
 func _on_botao_sons_pressed() -> void:
-	_check_fundo.set_pressed_no_signal(AudioManager.musica_ativa)
-	_check_efeitos.set_pressed_no_signal(AudioManager.efeitos_ativos)
-	_painel.visible = true
-
-
-func _on_fundo_toggled(ligado: bool) -> void:
-	AudioManager.definir_musica_ativa(ligado)
+	AudioManager.definir_som_ativo(not AudioManager.som_ativo)
 	_atualizar_icone()
-
-
-func _on_efeitos_toggled(ligados: bool) -> void:
-	AudioManager.definir_efeitos_ativos(ligados)
-	_atualizar_icone()
-
-
-func _on_fechar_pressed() -> void:
-	_painel.visible = false

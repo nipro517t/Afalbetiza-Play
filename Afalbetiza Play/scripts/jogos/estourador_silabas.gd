@@ -31,8 +31,6 @@ const VELOCIDADE_SUBIDA := 120.0 # dobrado (era 60.0)
 
 @onready var _label_meta: Label = $LabelMeta
 @onready var _imagem_palavra: TextureRect = $ImagemPalavra
-@onready var _label_pontos: Label = $LabelPontos
-@onready var _vidas: Array = [$Vidas/Vida1, $Vidas/Vida2, $Vidas/Vida3]
 @onready var _area_baloes: Node2D = $AreaBaloes
 @onready var _timer_spawn: Timer = $TimerSpawn
 
@@ -68,10 +66,9 @@ var _jogo_ativo: bool = true
 func _iniciar() -> void:
 	_gerar_ordem_sorteada()
 	_indice_atual = 0
-	_vidas_restantes = 3
+	_vidas_restantes = VIDAS_INICIAIS
 	_jogo_ativo = true
 	_atualizar_vidas()
-	_label_pontos.text = "PONTOS: 0"
 	_timer_spawn.timeout.connect(_spawnar_balao)
 	_carregar_palavra()
 
@@ -163,7 +160,6 @@ func _on_balao_tocada(balao: Balao) -> void:
 
 	if eh_correta:
 		registrar_acerto()
-		_label_pontos.text = "PONTOS: %d" % pontos
 		_indice_atual += 1
 		if _indice_atual >= _ordem_indices.size():
 			_finalizar_por_vitoria()
@@ -202,5 +198,4 @@ func _encerrar_rodada() -> void:
 
 
 func _atualizar_vidas() -> void:
-	for i in _vidas.size():
-		_vidas[i].color = Color(1, 0.85, 0.2) if i < _vidas_restantes else Color(0.3, 0.3, 0.3, 0.4)
+	atualizar_vidas_hud(_vidas_restantes)

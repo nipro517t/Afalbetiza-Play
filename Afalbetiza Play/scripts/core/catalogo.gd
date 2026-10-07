@@ -8,8 +8,10 @@ extends Node
 ## o outro não conhece).
 ##
 ## Para adicionar um jogo novo:
-## 1. Crie a cena em res://scenes/jogos/
-## 2. Acrescente uma entrada aqui embaixo.
+## - Jogo dentro do app: crie a cena em res://scenes/jogos/ e coloque
+##   "cena" na entrada abaixo.
+## - Jogo de navegador (link): coloque "url" no lugar de "cena" — o menu
+##   abre o link direto, sem cena nenhuma.
 ## Não precisa mexer no MenuPrincipal.gd.
 
 ## Pista das Letras saiu da lista (jogo de arrastar carrinho, nunca
@@ -21,13 +23,13 @@ var jogos: Array = [
 	{
 		"id": "trator_infantil",
 		"nome": "Trator das Letras",
-		"cena": "res://scenes/jogos/TratorInfantil.tscn",
+		"url": "https://al3xmoreira.github.io/infantil/",
 		"imagem": "res://assets/CAPAparajogos/tratorDasLetras.jpeg",
 	},
 	{
 		"id": "trator_fases",
 		"nome": "Trator das Letras — 36 Fases",
-		"cena": "res://scenes/jogos/TratorFases.tscn",
+		"url": "https://al3xmoreira.github.io/trator/",
 		"imagem": "res://assets/CAPAparajogos/tratorDasletras36Fasespal.jpeg",
 	},
 	{
