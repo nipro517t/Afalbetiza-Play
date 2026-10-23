@@ -44,4 +44,10 @@ var jogos: Array = [
 		"cena": "res://scenes/jogos/ConstrutorPalavras.tscn",
 		"imagem": "res://assets/CAPAparajogos/formarPalavras.jpeg",
 	},
+	{
+		"id": "bolinhas_do_vovo",
+		"nome": "Bolinhas do Vovô",
+		"url": "https://al3xmoreira.github.io/bolinhasdovovo/",
+		"imagem": "res://assets/CAPAparajogos/bolinhasDoVovo.jpeg",
+	},
 ]
